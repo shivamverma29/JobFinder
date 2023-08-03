@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Input from "./components/Input";
+import { useState } from "react";
+import Results from "./components/Results";
 
 function App() {
+  const [companies, setCompanies] = useState("");
+  const [type, setType] = useState("Job");
+  const [showResult, setShowResult] = useState(false);
+  const [urls, setUrls] = useState([]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Input
+        setCompanies={setCompanies}
+        setType={setType}
+        setShowResult={setShowResult}
+      />
+      {showResult && (
+        <Results
+          companies={companies}
+          type={type}
+          setUrls={setUrls}
+          urls={urls}
+        />
+      )}
     </div>
   );
 }
